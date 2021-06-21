@@ -1,0 +1,24 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div>
+            <form action="sellersignupvalidate" method="POST">
+                {% csrf_token %}
+                <input type="text" name="ssfirstname" placeholder="first name">
+                <input type="text" name="sslastname" placeholder="last name">
+                <input type="text" name="ssusername" placeholder="user name">
+                <input type="text" name="ssshopname" placeholder="shop name">
+                <input type="email" name="ssemail" placeholder="email">
+                <input type="tel" name="ssphonenumber" placeholder="phonenumber">
+                <input type="password" name="sspassword" placeholder="password">
+                <input type="password" name="sspassword2" placeholder="confirm password">
+                <input type="submit">
+                <a href="{% url 'sellerlogin' %}">Login</a>
+            </form>
+
+        </div>
+
+    </body>
+</html>

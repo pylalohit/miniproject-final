@@ -1,0 +1,23 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div>
+            <form action="buyersignupvalidate" method="POST">
+                {% csrf_token %}
+                <input type="text" name="bsfirstname" placeholder="first name">
+                <input type="text" name="bslastname" placeholder="last name">
+                <input type="text" name="bsusername" placeholder="user name">
+                <input type="email" name="bsemail" placeholder="email">
+                <input type="tel" name="bsphonenumber" placeholder="phonenumber">
+                <input type="password" name="bspassword" placeholder="password">
+                <input type="password" name="bspassword2" placeholder="confirm password">
+                <input type="submit">
+                <a href="{% url 'buyerlogin' %}">Login</a>
+            </form>
+
+        </div>
+
+    </body>
+</html>

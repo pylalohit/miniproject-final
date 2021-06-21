@@ -1,0 +1,15 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        
+        
+        {% for i in prod %}
+        {% if i.user_id == idr %}
+        {{i.pname}} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {{i.pprice}} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {{i.pquantity}} <br />
+        {% endif %}
+        {% endfor %}
+        
+    </body>
+</html>

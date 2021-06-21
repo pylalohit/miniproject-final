@@ -1,0 +1,24 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div>
+            <form action="sellerloginvalidate" method="POST">
+                {% csrf_token %}
+                {% if user.is_authenticated and user.is_staff == True %}
+                hello, {{user.first_name}}<br />
+                <a href="{% url 'sellerlogout' %}">logout</a>
+                {% else %}
+                <input type="text" name="slusername" placeholder="username">
+                <input type="email" name="slemail" placeholder="email">
+                <input type="password" name="passkey" placeholder="passkey">
+                <input type="password" name="slpassword" placeholder="password">
+                <input type="submit">
+                <a href="{% url 'sellersignup' %}">signup</a>
+                {% endif %}
+            </form>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,15 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        {% if user.is_authenticated and user.is_staff == True %}
+        <p>
+            hello {{user.username}} your in {{shopname}} and your contact number is {{phonenumber}}
+        </p>
+        <a href="{% url 'viewusers' %}">view users</a>
+        <a href="{% url 'addproduct' %}">add product</a>
+        <a href="{% url 'sellerlogout' %}">logout</a>
+        {% endif %} 
+    </body>
+</html>

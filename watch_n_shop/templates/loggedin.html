@@ -1,0 +1,30 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        
+        
+        {% if user.is_authenticated and user.is_staff == False %}
+        heyy {{user.first_name}} logged in
+        {% for i in det %}
+        {% if i.is_seller == True %}
+        hello
+        {{i.user_id}} {{i.username}} {{i.shopname}} {{i.phonenumber}} {{i.email}}<br /> 
+        {%endif%}
+        {%endfor%}
+        <a href="{% url 'buyerlogout' %}">Logout</a>
+        <form action="selectseller" method="POST">
+            {% csrf_token %}
+            <input type="number" name="sid" placeholder="Seller id">
+            <input type="submit">
+        </form>
+        <form action="wish_list" method="POST">
+            {% csrf_token %}
+            <textarea name="wlist" placeholder="add required products"></textarea>
+            <input type="submit">
+        </form>
+        {%endif%}
+
+    </body>
+</html>

@@ -1,0 +1,13 @@
+<html>
+    <head></head>
+    <body>
+        {% if user.is_authenticated and user.is_staff == True %}
+        {% for i in det %}
+        {% if i.is_buyer == True %}
+        {{i.user_id}} {{i.username}} {{i.phonenumber}} {{i.email}}<br /> 
+        {%endif%}
+        {%endfor%}
+        {%endif%}
+        
+    </body>
+</html>

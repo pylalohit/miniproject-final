@@ -1,0 +1,18 @@
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <form action="addproductvalidate" method="POST">
+            {% csrf_token %}
+            <input type="number" name="productid" placeholder="productid">
+            <input type="text" name="productname" placeholder="productname">
+            <input type="text" name="productdescription" placeholder="product description">
+            <input type="text" name="productavailability" placeholder="productavailability">
+            <input type="number" name="productquantity" placeholder="product quantity">
+            <input type="number" name = "productprice" placeholder="product price">
+            <input type="submit">
+        </form>
+
+    </body>
+</html>
