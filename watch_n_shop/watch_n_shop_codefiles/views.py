@@ -9,14 +9,14 @@ def cover(request):
 def buyerlogin(request):
     return render(request,'buyerlogin.html')
 
-def buyersignup(request):
-    return render(request,'buyersignup.html')
+#def buyersignup(request):
+    #return render(request,'buyersignup.html')
 
 def sellerlogin(request):
     return render(request,'sellerlogin.html')
 
-def sellersignup(request):
-    return render(request,'sellersignup.html')
+#def sellersignup(request):
+    #return render(request,'sellersignup.html')
 
 def sellerprofile(request):
     return render(request,'sellerprofile.html')
@@ -36,19 +36,19 @@ def buyersignupvalidate(request):
 
         if fn == "" or ln == "" or em == "" or pwd1 == "" or pwd2 == "" or phn == "":
             messages.info(request,'Fill all the required feilds')   
-            return redirect('buyersignup') 
+            return redirect('buyerlogin') 
             
         elif len(pwd1) < 8:
             messages.info(request,'Password must be atleast 8 characters long')
-            return redirect('buyersignup')
+            return redirect('buyerlogin')
         else:
             if pwd1 == pwd2:
                 if User.objects.filter(username=un).exists():
                     messages.info(request,'Username Taken')
-                    return redirect('buyersignup')
+                    return redirect('buyerlogin')
                 elif User.objects.filter(email=em).exists():
                     messages.info(request,'Email Taken')
-                    return redirect('buyersignup')
+                    return redirect('buyerlogin')
                 else :
                     user = User.objects.create_user(username = un,password = pwd1 ,first_name = fn,last_name = ln,email = em,is_staff = False)
                     user.save()
@@ -61,7 +61,7 @@ def buyersignupvalidate(request):
                     return redirect('buyerlogin')
             else :
                 messages.info(request,'passwords mismatch')
-                st = "buyersignup"
+                st = "buyerlogin"
                 return redirect(st)
 
 def buyerloginvalidate1(request):
@@ -105,19 +105,19 @@ def sellersignupvalidate(request):
 
         if fn == "" or ln == "" or em == "" or pwd1 == "" or pwd2 == "" or phn == "" or shopname == "":
             messages.info(request,'Fill all the required feilds')   
-            return redirect('sellersignup') 
+            return redirect('sellerlogin') 
             
         elif len(pwd1) < 8:
             messages.info(request,'Password must be atleast 8 characters long')
-            return redirect('sellersignup')
+            return redirect('sellerlogin')
         else:
             if pwd1 == pwd2:
                 if User.objects.filter(username=un).exists():
                     messages.info(request,'Username Taken')
-                    return redirect('sellersignup')
+                    return redirect('sellerlogin')
                 elif User.objects.filter(email=em).exists():
                     messages.info(request,'Email Taken')
-                    return redirect('sellersignup')
+                    return redirect('sellerlogin')
                 else :
                     user = User.objects.create_user(username = un,password = pwd1 ,first_name = fn,last_name = ln,email = em,is_staff = True)
                     user.save()
@@ -128,7 +128,7 @@ def sellersignupvalidate(request):
                     return redirect('sellerlogin')
             else :
                 messages.info(request,'passwords mismatch')
-                st = "sellersignup"
+                st = "sellerlogin"
                 return redirect(st)
 
 def sellerloginvalidate1(request):

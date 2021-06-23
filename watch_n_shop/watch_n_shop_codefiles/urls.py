@@ -5,9 +5,7 @@ from . import views
 urlpatterns = [
 path('',views.cover,name='cover'),
 path('buyerlogin',views.buyerlogin,name='buyerlogin'),
-path('buyersignup',views.buyersignup,name='buyersignup'),
 path('sellerlogin',views.sellerlogin,name='sellerlogin'),
-path('sellersignup',views.sellersignup,name='sellersignup'),
 path('buyerloginvalidate',views.buyerloginvalidate,name='buyerloginvalidate'),
 path('buyersignupvalidate',views.buyersignupvalidate,name='buyersignupvalidate'),
 path('sellerloginvalidate',views.sellerloginvalidate,name='sellerloginvalidate'),

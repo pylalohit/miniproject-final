@@ -1,11 +1,46 @@
-<html>
-    <head>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Website</title>
+    <link rel="stylesheet" href="{% static 'coverstyle.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+  </head>
+  <body style="background-color: #F08C8C;">
 
-    </head>
-    <body>
-        
-        <a href="{% url 'buyerlogin' %}">buyer</a><br />
-        <a href="{% url 'sellerlogin' %}">seller</a>
+    <section>
+      <input type="checkbox" id="check">
+      <header>
+        </div>
+        <h2><a href="#" class="logo">Logo</a></h2>
+        <div class="navigation">
+          <a href="#">Home</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </div>
+        <label for="check">
+        <i class="fas fa-bars menu-btn"></i>
+        <i class="fas fa-times close-btn"></i>
+        </label>
+      </header>
+      <div class="content">
+        <div class="info">
+          <h2>Like Nature <br><span>Be Creative!</span></h2>
+          <p>A well defined website with real time updated data about the availability of various products in a store and every customer can create a wishlist which can be viewed by seller ,so now the buyer can go to particualr seller where the items are ready or even hire a swiggy genie to deliver those products and the website is intutive enough to be accessible by both the customers and sellers.<br /><br />The time and efforts of a common person is no more wasted.<br /><br /><b>UPDATE . SEARCH . DECIDE . BUY</b></p>
+          
+          <a href="{% url 'buyerlogin' %}" class="info-btn">Buyer</a>&emsp;
+          <a href="{% url 'sellerlogin' %}" class="info-btn">Seller</a>
+        </div>
+        <img class="img1" src="static/images/main1.png" width="40%" alt="" srcset="">
+      </div>
+      <div class="media-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </section>
 
-    </body>
+  </body>
 </html>

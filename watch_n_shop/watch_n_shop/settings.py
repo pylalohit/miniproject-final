@@ -70,6 +70,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'watch_n_shop.wsgi.application'
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
