@@ -1,15 +1,50 @@
+{% load static %}
 <html>
     <head>
+        <link rel="stylesheet" href="{% static 'sellerprofile.css' %}" />
 
     </head>
     <body>
         {% if user.is_authenticated and user.is_staff == True %}
-        <p>
-            hello {{user.username}} your in {{shopname}} and your contact number is {{phonenumber}}
-        </p>
-        <a href="{% url 'viewusers' %}">view users</a>
-        <a href="{% url 'addproduct' %}">add product</a>
-        <a href="{% url 'sellerlogout' %}">logout</a>
+        <div class="navbar">
+            <p>Hello {{user.username}} your in {{shopname}} and your contact number is {{phonenumber}}</p>
+        </div>
+        <div class="actions">
+            <div class="btn">
+                <a style="color:white;text-decoration:none" href="{% url 'viewusers' %}">view users</a>          
+            </div>
+            <div class="btn">
+                <a style="color:white;text-decoration:none" href="{% url 'addproduct' %}">add / update product</a>           
+            </div>
+            <div class="btn">
+                <a style="color:white;text-decoration:none" href="{% url 'sellerlogout' %}">logout</a>           
+            </div>
+
+        </div>
+        <br /><hr>
+        <div class="main">
+            
+            <div class="wrapper-grid">
+                {% for i in products %}
+                {% if i.user_id == id %}
+                <div class="container">
+                <div class='banner-img'></div>
+                
+                <h1 class="name">{{i.pname}}</h1>
+                <p class="description"><sp>Description : </sp>{{i.pdescription}}</p>
+                <div class="description"><sp >PID : </sp>{{i.pid}}</div>
+                <div class="description"><sp>Price : </sp>{{i.pprice}}</div>
+                <div class="description"><sp>Availability : </sp>{{i.pavailability}}</div>
+                <div class="description"><sp>Quantity : </sp>{{i.pquantity}}</div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+    
+                
+        </div>
+        
+            
         {% endif %} 
     </body>
 </html>

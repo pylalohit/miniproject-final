@@ -135,10 +135,12 @@ def sellerloginvalidate1(request):
     if request.user.is_authenticated :
         current_user = request.user
         uname = current_user.username
+        id = current_user.id
         obj = userdetails.objects.get(username=uname)
         shnp = obj.shopname
         phnb = obj.phonenumber
-        return render(request,'sellerprofile.html',{'shopname':shnp,'phonenumber':phnb})
+        products = product.objects.all()
+        return render(request,'sellerprofile.html',{'shopname':shnp,'phonenumber':phnb,'products':products,'id':id,})
 
 
 def sellerloginvalidate(request):
