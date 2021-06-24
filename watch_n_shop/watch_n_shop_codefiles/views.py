@@ -206,8 +206,10 @@ def wish_list(request):
 def selectseller(request):
     id = request.POST['sid']
     id = int(id)
+    us = userdetails.objects.get(user_id = id)
+    shopname = us.shopname
     prd = product.objects.all()
-    return render(request,'viewseller.html',{'prod':prd,'idr':id})
+    return render(request,'viewseller.html',{'prod':prd,'idr':id,'shopname':shopname})
     
 
 def buyerlogout(request):

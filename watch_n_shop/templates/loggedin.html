@@ -1,30 +1,59 @@
+{% load static %}
 <html>
     <head>
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width", initial-scale = "1.0">
+        <link rel="stylesheet" href="{% static 'loggedin.css' %}">
+        <script
+            src="https://kit.fontawesome.com/64d58efce2.js"
+            crossorigin="anonymous"
+        ></script>
     </head>
     <body>
-        
-        
         {% if user.is_authenticated and user.is_staff == False %}
-        heyy {{user.first_name}} logged in
-        {% for i in det %}
-        {% if i.is_seller == True %}
-        hello
-        {{i.user_id}} {{i.username}} {{i.shopname}} {{i.phonenumber}} {{i.email}}<br /> 
-        {%endif%}
-        {%endfor%}
-        <a href="{% url 'buyerlogout' %}">Logout</a>
-        <form action="selectseller" method="POST">
-            {% csrf_token %}
-            <input type="number" name="sid" placeholder="Seller id">
-            <input type="submit">
-        </form>
-        <form action="wish_list" method="POST">
-            {% csrf_token %}
-            <textarea name="wlist" placeholder="add required products"></textarea>
-            <input type="submit">
-        </form>
-        {%endif%}
+        <div class="navbar">
+            <div class="navbar-inner">
+                
+                <h3 >Heyy {{user.first_name}} {{user.last_name}} you are Logged In.</h3>
+            </div>
+            <a class="logout" href="{% url 'buyerlogout' %}">Logout</a>
+        </div>
+        <div class = "main">
+            <div class="sellerlist">
+                <h2 class="title">Registered Sellers</h2>
+                {% for i in det %}
+                {% if i.is_seller == True %}
+                <div class="sellersublist" >
+                <b>ID :</b>{{i.user_id}} &emsp; <b>USERNAME :</b> {{i.username}} &emsp; <b>SHOPNAME :</b> {{i.shopname}} &emsp; <b>PHONENUMBER :</b> {{i.phonenumber}}<br /> 
 
+                </div>
+                {%endif%}
+                {%endfor%}
+                <form action="selectseller" method="POST">
+                    {% csrf_token %}
+                    <h4>Enter The Seller Id to View Their Products </h4>
+                    <div class="input-field">
+                        <i class="fas fa-store"></i>
+                        <input type="number" name="sid" placeholder="Seller id">
+                    </div>
+                    <input type="submit" class="btn">
+                </form>
+
+            </div>
+            <div class = "wishlist">
+                
+            
+                <form action="wish_list" method="POST">
+                    {% csrf_token %}
+                    <h2 class="title">WishList</h2>
+                    <textarea name="wlist" placeholder="add required products"></textarea><br />
+                    <input type="submit" class="btn">
+                </form>
+            </div>
+
+        </div>
+        {%endif%}
     </body>
 </html>

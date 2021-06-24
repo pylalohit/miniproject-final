@@ -1,15 +1,35 @@
+{% load static %}
 <html>
     <head>
-
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <link rel="stylesheet" href="{% static 'viewseller.css' %}">
     </head>
     <body>
+        <div class="nav">
+            <h3>Heyy {{user.first_name}} {{user.last_name}} Welcome to {{shopname}} stores.</h3>
+        </div>
+        <div class="main">
+            
+            <div class="wrapper-grid">
+                {% for i in prod %}
+                {% if i.user_id == idr %}
+                <div class="container">
+                <div class='banner-img'></div>
+                
+                <h1 class="name">{{i.pname}}</h1>
+                <p class="description"><sp>Description : </sp>{{i.pdescription}}</p>
+                <div class="description"><sp >PID : </sp>{{i.pid}}</div>
+                <div class="description"><sp>Price : </sp>{{i.pprice}}</div>
+                <div class="description"><sp>Availability : </sp>{{i.pavailability}}</div>
+                <div class="description"><sp>Quantity : </sp>{{i.pquantity}}</div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+    
+                
+        </div>
         
-        
-        {% for i in prod %}
-        {% if i.user_id == idr %}
-        {{i.pname}} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {{i.pprice}} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {{i.pquantity}} <br />
-        {% endif %}
-        {% endfor %}
         
     </body>
 </html>
