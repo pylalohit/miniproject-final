@@ -1,13 +1,49 @@
+{% load static %}
 <html>
-    <head></head>
-    <body>
-        {% if user.is_authenticated and user.is_staff == True %}
-        {% for i in det %}
-        {% if i.is_buyer == True %}
-        {{i.user_id}} {{i.username}} {{i.phonenumber}} {{i.email}}<br /> 
-        {%endif%}
-        {%endfor%}
-        {%endif%}
+    <head>
+        <link rel="stylesheet" href="{% static 'viewusers.css' %}">
+        <script
+            src="https://kit.fontawesome.com/64d58efce2.js"
+            crossorigin="anonymous"
+        ></script>
         
+    </head>
+    <body>      
+        {% if user.is_authenticated and user.is_staff == True %}
+        <div class="navbar">
+            <p>Hello {{user.username}} your in {{shopname}} and your contact number is {{phonenumber}}</p>
+        </div>
+        <div class="main">
+            <div class="sellerlist">
+                <h2 class="title">Registered Buyers</h2>
+                {% for i in det %}
+                {% if i.is_buyer == True %}
+                <div class="sellersublist" >
+                    <b>ID :</b>{{i.user_id}} &emsp; <b>USERNAME :</b> {{i.username}} &emsp;  <b>PHONENUMBER :</b> {{i.phonenumber}}<br /> 
+    
+                </div>
+                
+                {%endif%}
+                {%endfor%}
+                <form action="selectbuyer" method="POST">
+                    {% csrf_token %}
+                    <h4>Enter The Buyer Id to View Their Wishlist </h4>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="number" name="bid" placeholder="Buyer id">
+                    </div>
+                    <input type="submit" class="btn">
+                </form>
+                
+            </div>
+            <div class="viewwishlist">
+                <br />
+               <b>USER ID : </b> {{obj0.user_id}} &emsp; <b>USERNAME : </b> {{obj0.username }}&emsp; <b>USER PHONE NO : </b> {{obj0.phonenumber}}<br /><br />
+                <sp style="text-transform: uppercase;">{{obj1.list}}</sp>
+                
+            </div>
+
+        </div>
+        {%endif%}
     </body>
 </html>

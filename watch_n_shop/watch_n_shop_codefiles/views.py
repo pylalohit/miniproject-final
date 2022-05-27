@@ -75,18 +75,22 @@ def buyerloginvalidate(request):
         un = request.POST['blusername']
         em = request.POST['blemail']
         pwd = request.POST['blpassword']
-        obj = userdetails.objects.get(username=un)
-        if (obj is not None and obj.username == un and obj.email == em and obj.is_seller == False and obj.is_buyer == True and obj.passkey == '00'):
-            user = auth.authenticate(username=un,email=em,password=pwd)
-            if user is not None:
-                auth.login(request, user)
-                
-                return redirect(buyerloginvalidate1)
-            else:
-                messages.info(request,'invalid credentials')
-                return redirect('buyerlogin')
-        else :
+        if(un == '' or pwd == '' or em == ''):
+            messages.info(request,'Fill all missing fields')
             return redirect('buyerlogin')
+        else:
+            obj = userdetails.objects.get(username=un)
+            if (obj is not None and obj.username == un and obj.email == em and obj.is_seller == False and obj.is_buyer == True and obj.passkey == '00'):
+                user = auth.authenticate(username=un,email=em,password=pwd)
+                if user is not None:
+                    auth.login(request, user)
+                    
+                    return redirect(buyerloginvalidate1)
+                else:
+                    messages.info(request,'invalid credentials')
+                    return redirect('buyerlogin')
+            else :
+                return redirect('buyerlogin')
     else :
 
         return redirect('buyerlogin')
@@ -149,30 +153,43 @@ def sellerloginvalidate(request):
         em = request.POST['slemail']
         pwd = request.POST['slpassword']
         pk = request.POST['passkey']
-        obj = userdetails.objects.get(username=un)
-        if (obj is not None and obj.username == un and obj.email == em and obj.is_seller == True and obj.is_buyer == False and obj.passkey == '09'):
-            user = auth.authenticate(username=un,email=em,password=pwd)
-            if user is not None:
-                auth.login(request, user)
-                return redirect(sellerloginvalidate1)
-            else:
-                messages.info(request,'invalid credentials')
-                return redirect('sellerlogin')
-        else :
+        if (un == '' or pwd == '' or pk == '' or  em == "" ):
+            messages.info(request,'Fill all the fields required')
             return redirect('sellerlogin')
+        else :
+            obj = userdetails.objects.get(username=un)
+            if (obj is not None and obj.username == un and obj.email == em and obj.is_seller == True and obj.is_buyer == False and obj.passkey == '09'):
+                user = auth.authenticate(username=un,email=em,password=pwd)
+                if user is not None:
+                    auth.login(request, user)
+                    return redirect('sellerloginvalidate1')
+                else:
+                    messages.info(request,'invalid credentials')
+                    return redirect('sellerlogin')
+            else :
+                return redirect('sellerlogin')
     else :
 
         return redirect('sellerlogin')
 
 def viewusers(request):
-    det = userdetails.objects.all()
-    return render(request,'viewusers.html',{'det':det})
+    if request.user.is_authenticated :
+        current_user = request.user
+        uname = current_user.username
+        obj = userdetails.objects.get(username=uname)
+        shnp = obj.shopname
+        phnb = obj.phonenumber
+        det = userdetails.objects.all()
+        return render(request,'viewusers.html',{'shopname':shnp,'phonenumber':phnb,'det':det})
 
     
     
 def addproductvalidate(request):
     if request.method == 'POST' :
         pid = request.POST['productid']
+        if product.objects.filter(pid=pid).exists():
+                    messages.info(request,'Pid already exists.')
+                    return redirect('addproduct')
         pname = request.POST['productname']
         pdescription = request.POST['productdescription']
         pavailable = request.POST['productavailability']
@@ -189,7 +206,7 @@ def addproductvalidate(request):
             if prod is not None:
                 prod.save()
                 messages.info(request,'added successfully')
-                return render(request,'sellerprofile.html')
+                return redirect('sellerloginvalidate1')
             else:
                 return redirect('sellerprofile')
     else :
@@ -203,7 +220,8 @@ def wish_list(request):
         obj = wishlist.objects.get(user_id = id)
         obj.list = wl
         obj.save()
-        return redirect(buyerloginvalidate1)
+        messages.info(request,'your list is updated successfully')
+        return redirect('buyerloginvalidate1')
 
 def selectseller(request):
     id = request.POST['sid']
@@ -212,7 +230,58 @@ def selectseller(request):
     shopname = us.shopname
     prd = product.objects.all()
     return render(request,'viewseller.html',{'prod':prd,'idr':id,'shopname':shopname})
+
+def selectbuyer(request):
+    current_user = request.user
+    uname = current_user.username
+    obj = userdetails.objects.get(username=uname)
+    shnp = obj.shopname
+    phnb = obj.phonenumber
+    det = userdetails.objects.all()
+    id = request.POST['bid']
+    id = int(id)
+    obj0 = userdetails.objects.get(user_id = id)
+    obj1 = wishlist.objects.get(user_id = id)
+    return render(request,'viewusers.html' ,{'obj0':obj0,'obj1':obj1,'phnp':phnb,'shopname':shnp,'det':det})
+
+
+def updateproduct(request):
+    if request.method == 'POST' :
+        pid = request.POST['productid']
+        pname = request.POST['productname']
+        pdescription = request.POST['productdescription']
+        pavailable = request.POST['productavailability']
+        pquantity = request.POST['productquantity']
+        pprice = request.POST['productprice']
     
+    if pid != "" :
+
+        obj = product.objects.get(pid=pid)
+        if (obj != None):
+            if pname != "":
+                obj.pname = pname
+                obj.save()
+            if pdescription != "":
+                obj.pdescription = pdescription
+                obj.save()
+            if pavailable != "":
+                obj.pavailability = pavailable
+                obj.save()
+            if pquantity != "":
+                obj.pquantity = pquantity
+                obj.save()
+            if pprice != "":
+                obj.pprice = pprice
+                obj.save()
+            
+            return redirect('sellerloginvalidate1')
+
+        else :
+            messages.info(request,'please enter the valis pid')
+            return redirect('updateproduct')
+    else :
+        messages.info(request,'please enter the valid pid')
+        return redirect('updateproduct')
 
 def buyerlogout(request):
     auth.logout(request)

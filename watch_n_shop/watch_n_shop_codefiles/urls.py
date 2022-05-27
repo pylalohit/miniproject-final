@@ -20,4 +20,6 @@ path('selectseller',views.selectseller,name='selectseller'),
 path('buyerloginvalidate1',views.buyerloginvalidate1,name='buyerloginvalidate'),
 path('sellerloginvalidate1',views.sellerloginvalidate1,name='sellerloginvalidate1'),
 path('wish_list',views.wish_list,name='wishlist'),
+path('selectbuyer',views.selectbuyer,name='selectbuyer'),
+path('updateproduct',views.updateproduct,name='updateproduct'),
 ]

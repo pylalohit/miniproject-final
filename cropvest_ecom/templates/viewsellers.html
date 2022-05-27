@@ -12,19 +12,12 @@
         ></script>
     </head>
     <body>
-        {% if user.is_authenticated and user.is_staff == False %}
-        <div class="navbar">
-            <div class="navbar-inner">
-                
-                <h3 >Heyy {{user.first_name}} {{user.last_name}} you are Logged In.</h3>
-            </div>
-            <a class="logout" href="{% url 'buyerlogout' %}">Logout</a>
-        </div>
+        
         <div class = "main">
             <div class="sellerlist">
                 <h2 class="title">Registered Sellers</h2>
                 {% for i in det %}
-                {% if i.is_seller == True %}
+                {% if i.is_superuser != True %}
                 <div class="sellersublist" >
                 <b>ID :</b>{{i.user_id}} &emsp; <b>USERNAME :</b> {{i.username}} &emsp; <b>SHOPNAME :</b> {{i.shopname}} &emsp; <b>PHONENUMBER :</b> {{i.phonenumber}}<br /> 
 
@@ -43,20 +36,12 @@
 
             </div>
             <div class = "wishlist">
-                
             
-                <form action="wish_list" method="POST">
-                    {% csrf_token %}
-                    <h2 class="title">WishList</h2>
-                    <textarea name="wlist" placeholder="add required products"></textarea><br />
-                    <input type="submit" class="btn">
-                </form>
-                {% for message in messages %}
-            {{message}}
-            {% endfor %}
+            <textarea name="wlist" placeholder="add required products"></textarea><br />
+                    
             </div>
             
         </div>
-        {%endif%}
+        
     </body>
 </html>

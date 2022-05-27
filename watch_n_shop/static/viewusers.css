@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+body{
+    background-color: #F08C8C;
+
+}
+p{
+    font-weight: bold;
+}
+.navbar{
+    margin-top: 30px;
+    margin-left:2%;
+    margin-bottom: 15px;
+}
+.sellerlist{
+    display: block;
+    margin-left: 2%;
+    width: 50%;
+}
+.sellersublist{
+    background-color: white;
+    width: 100%;
+    margin-bottom:2%;
+    background-color: #f0f0f0;
+    margin: 10px 0;
+    height: 30px;
+    padding-top:7px;
+    padding-left: 10px;
+    border-radius: 55px;
+    text-align: left;
+    
+}
+.main{
+    display:flex;
+    gap: 5%;
+}
+.viewwishlist{
+    width:40%;
+    background-color:white;
+}
+.title {
+    font-size: 2.2rem;
+    font-family: 'Playfair Display', serif;
+    color: black;
+    margin-bottom: 10px;
+}
+.input-field {
+    
+    width: 100%;
+    background-color: #f0f0f0;
+    margin: 10px 0;
+    height: 35px;
+    border-radius: 55px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    position: relative;
+  }
+  .input-field i {
+    text-align: center;
+    line-height: 35px;
+    color: #acacac;
+    transition: 0.5s;
+    font-size: 1.1rem;
+  }
+  
+  .input-field input {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  .btn {
+    width: 150px;
+    background-color: #226A80;
+    border: none;
+    outline: none;
+    height: 40px;
+    border-radius: 49px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.5s;
+  }

@@ -15,20 +15,17 @@
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form  action="sellerloginvalidate" method="POST" class="sign-in-form">
+          <form  action="loginverifying" method="POST" class="sign-in-form">
             {% csrf_token %}
-            {% if user.is_authenticated and user.is_staff == True %}
+            {% if user.is_authenticated %}
             hello, {{user.first_name}}<br />
-            <a href="{% url 'sellerlogout' %}">logout</a>
+            <a href="{% url 'logout' %}">logout</a>
             {% else %}
             <h2 class="title">Seller Sign in</h2>
+            
             <div class="input-field">
               <i class="fas fa-user"></i>
               <input type="text" name="slusername" placeholder="username" />
-            </div>
-            <div class="input-field">
-              <i class="fas fa-envelope"></i>
-              <input type="email" name="slemail" placeholder="email" />
             </div>
             <div class="input-field">
               <i class="fas fa-key"></i>
@@ -42,18 +39,18 @@
             {% for message in messages %}
       {{message}}
     {% endfor %}
-            {% endif %}
+            
           </form>
-          <form action="sellersignupvalidate" method="POST"class="sign-up-form" >
+          <form action="signupverifying" method="POST"class="sign-up-form" >
             {% csrf_token %}
             <h2 class="title">Seller Sign up</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" name="ssfirstname" placeholder="first name" />
+              <input type="text" name="ssfullname" placeholder="Full name" />
             </div>
             <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="text" name="sslastname" placeholder="last name" />
+              <i class="fa fa-map-marker"></i>
+              <input type="text" name="ssaddress" placeholder="address" />
             </div>
             <div class="input-field">
               <i class="fas fa-user"></i>
@@ -116,7 +113,7 @@
         </div>
       </div>
     </div>
-
+    {% endif %}
     <script src="static/app.js"></script>
   </body>
 </html>

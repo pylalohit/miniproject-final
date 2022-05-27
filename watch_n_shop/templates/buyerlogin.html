@@ -36,6 +36,9 @@
             </div>
             <input type="submit"  class="btn solid" />
             {% endif %}
+            {% for message in messages %}
+      {{message}}
+    {% endfor %}
           </form>
           <form action="buyersignupvalidate" method="POST"class="sign-up-form" >
             {% csrf_token %}
@@ -69,6 +72,9 @@
               <input type="password" name="bspassword2" placeholder="confirm password" />
             </div>
             <input type="submit" class="btn" value="Sign up" />
+            {% for message in messages %}
+      {{message}}
+    {% endfor %}
           </form>
         </div>
       </div>
@@ -104,5 +110,6 @@
     </div>
 
     <script src="static/app.js"></script>
+    
   </body>
 </html>
